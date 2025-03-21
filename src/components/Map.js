@@ -4,12 +4,6 @@ import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
 import { createPortal } from 'react-dom';
 
-const defaultIcon = new L.Icon({
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-});
 
 // Component to handle map click events for location selection
 function LocationPicker({ onLocationSelect, isActive }) {
@@ -48,9 +42,17 @@ export default function Map({ protests }) {
         location: { lat: null, lng: null }
     });
     const [portalContainer, setPortalContainer] = useState(null);
+    const [markerIcon, setMarkerIcon] = useState(null);
 
     useEffect(() => {
         // Set the portal container to be the document body
+        const customIcon = L.icon({
+            iconUrl: '/images/marker.png',
+            iconSize: [32, 32], // size of the icon
+            iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
+        });
+        setMarkerIcon(customIcon);
         setPortalContainer(document.body);
     }, []);
 
@@ -109,7 +111,7 @@ export default function Map({ protests }) {
                         <Marker
                             key={protest.id}
                             position={[protest.location.lat, protest.location.lng]}
-                            icon={defaultIcon}
+                            icon={markerIcon}
                         >
                             <Popup>
                                 <h3>{protest.name}</h3>
