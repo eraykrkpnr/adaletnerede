@@ -20,7 +20,7 @@ function LocationPicker({ onLocationSelect, isActive }) {
 // Custom button in bottom-right corner
 function AddEventControl({ onClick }) {
     return (
-        <div className="leaflet-bottom leaflet-right" style={{ zIndex: 1000 }}>
+        <div className="leaflet-top leaflet-right" style={{ zIndex: 1000 }}>
             <div className="leaflet-control leaflet-bar">
                 <button
                     className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg hover:bg-blue-700 transition-colors text-lg font-medium cursor-pointer"
